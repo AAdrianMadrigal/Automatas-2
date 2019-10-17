@@ -1,0 +1,13 @@
+public class automatasproyecto{
+	public string nombre="Adrian";
+	private int a=1;
+	private int b=8;
+	public string texto= "holahola";
+	public boolean falver=false;
+	public int c=5;
+	if(10>4){
+	falver=true;
+	public int numeros=1;
+	public int suma=2+2;
+	}
+}
