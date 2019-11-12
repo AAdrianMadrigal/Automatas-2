@@ -5,18 +5,16 @@ package Analizador;
  * Clase Semantica
  */
 public class semanticoYvalidaciones {
-
-	//Revisa que el identificador enviado por parametro este dentro de la tabla de simbolos
 	static public void checarSiExisteToken(identificadores variable) {
 		for (int j = 0; j < lexicoYmas.tablaSimbolos.size(); j++) {
 			if(lexicoYmas.tablaSimbolos.get(j).getNombre().equals(variable.getNombre())) {
-				System.out.println("-----------------------------------------------------------------------------------------------------");
+				System.out.println("--------------------------------------------------------------------------------------------------------");
 				System.out.println("Linea: "+variable.getPos()+" Error: La variable "+variable.getNombre()+" ya habia sido declarada con un tipo: "+lexicoYmas.tablaSimbolos.get(j).getTipoDato());
 			}
 		}	
 
 	}
-	//verifica que el valor sea el mismo tipo que su tipo de dato
+
 	static public void checarTipoDato(identificadores variable) {
 		String tipoDato=variable.getTipoDato();
 		String valor=variable.getValor();
@@ -28,19 +26,19 @@ public class semanticoYvalidaciones {
 					Integer.parseInt(valor);
 				}				
 			} catch (Exception e) {
-				System.out.println("-----------------------------------------------------------------------------------------------------");
+				System.out.println("--------------------------------------------------------------------------------------------------------");
 				System.out.println("Linea: "+variable.getPos()+" error en el Identificador "+variable.getNombre()+",puesto que este valor no es Entero(Int) - Debes utilizar el Tipo de Dato: "+variable.getTipoDato());
 			}
 		}
 		if(tipoDato.equals("double")) {
 			try {
 				if(valor.contains("(") || valor.contains(")") || valor.contains("+") || valor.contains("-") || valor.contains("*") || valor.contains("/")) {
-					
+					//System.out.println("Evaluando operacion");
 				}else {
 					Double.parseDouble(valor);
 				}				
 			} catch (Exception e) {
-				System.out.println("-----------------------------------------------------------------------------------------------------");
+				System.out.println("--------------------------------------------------------------------------------------------------------");
 				System.out.println("Linea: "+variable.getPos()+" error en el Identificador "+variable.getNombre()+",puesto que este valor no es Double- Debes utilizar el Tipo de Dato: "+variable.getTipoDato());
 
 			}
@@ -50,7 +48,7 @@ public class semanticoYvalidaciones {
 				if(valor.startsWith("")&&valor.endsWith("\"")) {
 					// System.out.println("String valido");
 				}else {
-					System.out.println("-----------------------------------------------------------------------------------------------------");
+					System.out.println("--------------------------------------------------------------------------------------------------------");
 					System.out.println("Linea: "+variable.getPos()+" error en el Identificador "+variable.getNombre()+" puesto que este no es un string debes utilizar comillas dobles: "+"\"Cadena de Ejemplo\"");
 				}
 			} catch (Exception e) {
@@ -63,14 +61,13 @@ public class semanticoYvalidaciones {
 			if (valor.equals("true") || valor.equals("false")) {
 				//System.out.println("Booleano correcto");
 			}else {
-				System.out.println("-----------------------------------------------------------------------------------------------------");
+				System.out.println("--------------------------------------------------------------------------------------------------------");
 				System.out.println("Linea: "+variable.getPos()+" error en el Identificador "+variable.getNombre()+" puesto que este no es un Boolean debes utilizar: "+"true, false");
 			}
 		}
 
 	}
 
-	//varifica que los operandos dados sean del mismo tipo
 	static public void checarComparacionValores(String a, String b, int linea) {
 		try {
 			if(!a.isEmpty() && !b.isEmpty()) {
@@ -131,11 +128,11 @@ public class semanticoYvalidaciones {
 		}
 		if(temp1.isEmpty()) {
 			System.out.println("Linea: "+linea+" error: la variable "+a+" no esta declarada");
-			System.out.println("-----------------------------------------------------------------------------------------------------");
+			System.out.println("--------------------------------------------------------------------------------------------------------");
 		}
 		for (int j = 0; j < lexicoYmas.tablaSimbolos.size(); j++) {
 			if(lexicoYmas.tablaSimbolos.get(j).getNombre().equals(a)) {
-				System.out.println("****************************************************************************************************");
+				System.out.println("--------------------------------------------------------------------------------------------------------");
 				if(esEntero(b)==true && lexicoYmas.tablaSimbolos.get(j).getTipoDato().equals("int")) {
 					System.out.println("Linea: "+linea+" comparacion valida "+lexicoYmas.tablaSimbolos.get(j).getTipoDato());
 				}else if(esDoble(b)==true && lexicoYmas.tablaSimbolos.get(j).getTipoDato().equals("double")){
@@ -148,7 +145,7 @@ public class semanticoYvalidaciones {
 					
 				}
 				System.out.println("La variable "+a+" es de tipo: "+lexicoYmas.tablaSimbolos.get(j).getTipoDato());
-				System.out.println("-----------------------------------------------------------------------------------------------------");
+				System.out.println("--------------------------------------------------------------------------------------------------------");
 			}
 		}
 	}
@@ -164,11 +161,11 @@ public class semanticoYvalidaciones {
 		}
 		if(temp1.isEmpty()) {
 			System.out.println("Linea: "+linea+" error: la variable "+a+" no esta declarada");
-			System.out.println("-----------------------------------------------------------------------------------------------------");
+			System.out.println("--------------------------------------------------------------------------------------------------------");
 		}
 		for (int j = 0; j < lexicoYmas.tablaSimbolos.size(); j++) {
 			if(lexicoYmas.tablaSimbolos.get(j).getNombre().equals(a)) {
-				System.out.println("-----------------------------------------------------------------------------------------------------");
+				System.out.println("--------------------------------------------------------------------------------------------------------");
 				
 				if(esEntero(b)==true && lexicoYmas.tablaSimbolos.get(j).getTipoDato().equals("int")) {
 					System.out.println("Linea: "+linea+" comparacion valida "+lexicoYmas.tablaSimbolos.get(j).getTipoDato());
@@ -180,12 +177,12 @@ public class semanticoYvalidaciones {
 					System.out.println("Linea: "+linea+" error: comparacion invalida: "+b+" no es de tipo: "+lexicoYmas.tablaSimbolos.get(j).getTipoDato());
 				}
 				System.out.println("La variable "+a+" es de tipo: "+lexicoYmas.tablaSimbolos.get(j).getTipoDato());
-				System.out.println("-----------------------------------------------------------------------------------------------------");
+				System.out.println("--------------------------------------------------------------------------------------------------------");
 			}
 		}	
 
 	}
-	//revisa que las dos valores dados son los mismos
+
 	public static void obtenerDatoComparacion3(String a, String b, int linea) {
 		String temp1="";
 		String temp2="";
@@ -201,22 +198,22 @@ public class semanticoYvalidaciones {
 		}
 		if(temp1.isEmpty()) {
 			System.out.println("Linea: "+linea+" error: la variable "+a+" no esta declarada");
-			System.out.println("-----------------------------------------------------------------------------------------------------");
+			System.out.println("--------------------------------------------------------------------------------------------------------");
 		}
 		if(temp2.isEmpty()) {
 			System.out.println("Linea: "+linea+" error: la variable "+b+" no esta declarada");
-			System.out.println("-----------------------------------------------------------------------------------------------------");
+			System.out.println("--------------------------------------------------------------------------------------------------------");
 		}
 		if(!temp1.isEmpty() && !temp2.isEmpty() && !temp1.equals(temp2)) {
-			System.out.println("-----------------------------------------------------------------------------------------------------");
+			System.out.println("--------------------------------------------------------------------------------------------------------");
 			System.out.println("Linea: "+linea+" error: las variables: "+a+" y "+b+" no son del mismo tipo");
 			System.out.println("La variable: "+a+" es de tipo: "+temp1);
 			System.out.println("La variable: "+b+" es de tipo: "+temp2);
-			System.out.println("-----------------------------------------------------------------------------------------------------");
+			System.out.println("--------------------------------------------------------------------------------------------------------");
 		}
 	}
 
-	//revisa que los valoes que se le esten asignadondo a una variable sean del mismo tipo que esta
+
 	static public void checarTipoDatoenAsignacion(String tipoDato, String valor, String identificador, int linea) {
 		if(tipoDato.equals("int")){
 			try {
@@ -227,7 +224,7 @@ public class semanticoYvalidaciones {
 					}
 				}
 			} catch (Exception e) {
-				System.out.println("-----------------------------------------------------------------------------------------------------");
+				System.out.println("--------------------------------------------------------------------------------------------------------");
 				System.out.println("Linea: "+linea+" IMPOSIBLE DE ASIGNAR: Error en el Identificador "+identificador+",puesto que este valor no es Entero(Int) - Debes utilizar el Tipo de Dato: "+tipoDato);
 			}
 		}
@@ -240,7 +237,7 @@ public class semanticoYvalidaciones {
 					}
 				}
 			} catch (Exception e) {
-				System.out.println("-----------------------------------------------------------------------------------------------------");
+				System.out.println("--------------------------------------------------------------------------------------------------------");
 				System.out.println("Linea: "+linea+" IMPOSIBLE DE ASIGNAR: Error en el Identificador "+identificador+",puesto que este valor no es Double- Debes utilizar el Tipo de Dato: "+tipoDato);
 
 			}
@@ -255,7 +252,7 @@ public class semanticoYvalidaciones {
 						}
 					}
 				}else {
-					System.out.println("-----------------------------------------------------------------------------------------------------");
+					System.out.println("--------------------------------------------------------------------------------------------------------");
 					System.out.println("Linea: "+linea+" IMPOSIBLE DE ASIGNAR: Error en el Identificador "+identificador+" puesto que este no es un string debes utilizar comillas dobles: "+"\"Cadena de Ejemplo\"");
 				}
 			} catch (Exception e) {
@@ -273,13 +270,13 @@ public class semanticoYvalidaciones {
 					}
 				}
 			}else {
-				System.out.println("-----------------------------------------------------------------------------------------------------");
+				System.out.println("--------------------------------------------------------------------------------------------------------");
 				System.out.println("Linea: "+linea+" IMPOSIBLE DE ASIGNAR: Error en el Identificador "+identificador+" puesto que intentaste asignar un valor NO BOOLEANO, debes utilizar: "+"true, false");
 			}
 		}
 
 	}
-	//revisa que la asginacion de una variable a otra sea del mismo tipo
+
 	public static void asignarvariabledentro(String identificador, String valor, int linea) {
 		//System.out.println(identificador);
 		//System.out.println(valor);
@@ -291,20 +288,20 @@ public class semanticoYvalidaciones {
 				temp1=lexicoYmas.tablaSimbolos.get(j).getTipoDato();
 				checarTipoDatoenAsignacion(temp1, valor, identificador, linea);
 				if(esBooleano(valor)==true && temp1.equals("boolean")) {
-					System.out.println("-----------------------------------------------------------------------------------------------------");
-					System.out.println("Linea: "+linea+"  asignacionn booleana correcta en: "+identificador);
+					System.out.println("--------------------------------------------------------------------------------------------------------");
+					System.out.println("Linea: "+linea+"  asignación booleana correcta en: "+identificador);
 				}else if(esEntero(valor)==true && temp1.equals("int")){
-					System.out.println("-----------------------------------------------------------------------------------------------------");
-					System.out.println("Linea: "+linea+"  asignacionn int correcta en: "+identificador);
+					System.out.println("--------------------------------------------------------------------------------------------------------");
+					System.out.println("Linea: "+linea+"  asignación int correcta en: "+identificador);
 				}else if(esDoble(valor)==true && temp1.equals("double")){
-					System.out.println("-----------------------------------------------------------------------------------------------------");
-					System.out.println("Linea: "+linea+"  asignacionn double correcta en: "+identificador);
+					System.out.println("--------------------------------------------------------------------------------------------------------");
+					System.out.println("Linea: "+linea+"  asignación double correcta en: "+identificador);
 				}
 			}
 
 		}
 		if(bandera==false) {
-			System.out.println("-----------------------------------------------------------------------------------------------------");
+			System.out.println("--------------------------------------------------------------------------------------------------------");
 			System.out.println("Linea: "+linea+" error: la variable: "+identificador+" no se encuentra declarada y no se puede asignar");
 		}
 	}

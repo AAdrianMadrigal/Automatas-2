@@ -244,7 +244,12 @@ void variable_declarator():{}{
 	   nombreTemp=identificador.image;
 	   if(valor==null) {
 	   valorTemp=valorexpresion.image;
-	  
+	   try {
+    Triplos.Arbol evaluaexp=new Triplos.Arbol(valorTemp);
+       } catch (Exception e) {
+	   System.out.println("Se encontraron variables dentro de la expresion: "+nombreTemp);
+	   OperacionesExpresion oe=new OperacionesExpresion(nombreTemp);
+} 
 
 	   Expresion exptemp=new Expresion();
 	   exptemp.setIdentificador(nombreTemp);
@@ -255,8 +260,7 @@ void variable_declarator():{}{
          valorTemp=valor.image;
 	   }
 	}
-}	
-
+}
 void modificacion_variable():{}{
   {
   Token identificador;

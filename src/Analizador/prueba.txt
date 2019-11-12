@@ -1,13 +1,21 @@
 public class automatasproyecto{
 	public string nombre="Adrian";
-	private int a=1;
+	private int a=3;
 	private int b=8;
-	public string texto= "holahola";
-	public boolean falver=false;
+	public string escuela= "Instituto Tecnologico de Culiacan";
+	private boolean boolea=true;
 	public int c=5;
 	if(10>4){
-	falver=true;
-	public int numeros=1;
-	public int suma=2+2;
+	public int numero=1;
+	public int ecuacion1=(1*2+9)/2;
+	nop=false;
 	}
+	while(10>2){
+		if (1>0.5){
+		}else{
+		public int val_cuatro=4;
+		}
+		
+	}
+	
 }

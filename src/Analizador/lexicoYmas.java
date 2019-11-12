@@ -48,6 +48,10 @@ class lexicoYmas implements lexicoYconstantes {
                                                 ", Valor: "+tablaSimbolos.get(i).getValor()+
                                                 ", Alcance: "+tablaSimbolos.get(i).getAlcance());
                         }
+                          for ( int i = 0; i < listaexpresiones.size(); i ++){
+                              // System.out.println("EXPRESIONES MATEMATICAS INGRESADAS : ");
+                              // System.out.println("Identificador: "+listaexpresiones.get(i).getIdentificador()+" Expresion: "+listaexpresiones.get(i).getExpresion());
+                }
                 }
                 catch(ParseException e)
                 {
@@ -75,7 +79,7 @@ class lexicoYmas implements lexicoYconstantes {
         sentencia();  //cuerpo o contenido de la clase
       }
       jj_consume_token(LLAVEDERECHA); // Consume el token "}"
-      //Crea un token "fin del arcivo" y todo lo que venga despues de el estara incorrecto
+      //Crea un token "fin del archivo" y todo lo que venga despues de el estara incorrecto
          identificadores temp=new identificadores("","","","","","",0,"No aplica");
           temp.setTipo("Clase");
       temp.setUso("Declaracion");
@@ -116,19 +120,18 @@ class lexicoYmas implements lexicoYconstantes {
           tempgeneral.setNombre(nombreTemp);
           tempgeneral.setValor(valorTemp);
           tempgeneral.setAlcance("Global");
-          
-          // Analisis semmantico
-          //
-          //
-          //
-          //
-           semanticoYvalidaciones val=new semanticoYvalidaciones();
+           semanticoYvalidaciones val=new semanticoYvalidaciones ();
            val.checarSiExisteToken(tempgeneral);
            val.checarTipoDato(tempgeneral);
            tablaSimbolos.put(pos,tempgeneral);
            pos++;
 
-
+          // Analisis semmantico
+          //
+          //
+          //
+          //
+ 
 
   }
 
@@ -197,7 +200,12 @@ class lexicoYmas implements lexicoYconstantes {
            if(valor == null) { //verifica que el valor sea una expresion
         	   valorTemp = valorexpresion.image; //variable temporal que guarda la expresion
 
-
+ 		try {
+   			 Triplos.Arbol evaluaexp=new Triplos.Arbol(valorTemp);
+       				} catch (Exception e) {
+           				System.out.println("Se encontraron variables dentro de la expresion: "+nombreTemp);
+          				OperacionesExpresion oe=new OperacionesExpresion(nombreTemp);
+}
            expresiones exptemp=new expresiones();
            exptemp.setIdentificador(nombreTemp); //crea una identificador para ser referenciado por una expresion
            exptemp.setExpresion(valorTemp);	//asigna la expresion al identificador anterior

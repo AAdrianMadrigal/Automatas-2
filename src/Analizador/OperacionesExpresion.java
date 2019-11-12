@@ -40,14 +40,16 @@ public class OperacionesExpresion {
             	expresiontemp=a;
             	for (int i = 0; i < lexicoYmas.tablaSimbolos.size(); i++) {
 					if(cadena.contains(lexicoYmas.tablaSimbolos.get(i).getNombre())){
-						System.out.println("Se encontró la variable: "+lexicoYmas.tablaSimbolos.get(i).getNombre()+" dentro de la expresion: "+nombreTemp+" con un valor de: "+lexicoYmas.tablaSimbolos.get(i).getValor());
+						System.out.println("Se encontro la variable: "+lexicoYmas.tablaSimbolos.get(i).getNombre()+" dentro de la expresion: "+nombreTemp+" con un valor de: "+lexicoYmas.tablaSimbolos.get(i).getValor());
 						 String nuevaExpresion=expresiontemp.replace(lexicoYmas.tablaSimbolos.get(i).getNombre(),lexicoYmas.tablaSimbolos.get(i).getValor());
 						 expresiontemp=nuevaExpresion;
 
 					}
 
 				}
-         
+         System.out.println("Expresion encontrada: "+a);
+				 System.out.println("Expresion reemplazada: "+expresiontemp);
+				 Triplos.Arbol evaluaexp2=new Triplos.Arbol(expresiontemp);
 				 
             }
         }
