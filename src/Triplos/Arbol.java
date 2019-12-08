@@ -24,6 +24,30 @@ public class Arbol{
     	      Shunting parentNode=shunt(valorexpresion);
     	      System.out.println("Utilizando Postorden");
     	      postorden(parentNode);
+    	      //ensamblador
+    	      System.out.println("Codigo Intermedio Generado ------- Triplos---");
+    	        dfs(parentNode);
+    	        System.out.println("--------------------------------------------------------------------------------------");
+    	        System.out.println("codigo ensamblador");
+    	        System.out.println("          .MODEL          small");
+    	        System.out.println("          .DATA");
+    	        System.out.println("T1        DW              0");
+    	        System.out.println("T2        DB              0");
+    	        System.out.println("X         DB              0");
+    	        System.out.println("          .CODE");
+    	        System.out.println("MAIN      PROC            FAR");
+    	        System.out.println("          .STARTUP");
+    	        ensamblador(parentNode);
+    	        System.out.println("          ;imprimir");
+    	        System.out.println("          ADD    X,30H");
+    	        System.out.println("          MOV    BX,0001H");
+    	        System.out.println("          MOV    DL,X");
+    	        System.out.println("          MOV    AH,02H");
+    	        System.out.println("          INT    21H");
+    	        System.out.println("          .EXIT");
+    	        System.out.println("MAIN      ENDP");
+    	        System.out.println("          END");
+    	      //fin ensamblador
     	      System.out.println("Codigo Intermedio Generado -------- Triplo----");
     	      dfs(parentNode);
     	      
@@ -49,8 +73,10 @@ public class Arbol{
         Shunting parentNode=shunt(inputString);
         System.out.println("Utilizando Postorden");
         postorden(parentNode);
-        System.out.println("Codigo Intermedio Generado ------- Triplos---");
-        dfs(parentNode);
+        
+        
+        
+        
     }
 
 
@@ -75,6 +101,53 @@ public class Arbol{
         }
         System.out.println(root.charac +" ");
     }
+    
+  //ensamblador
+    public static void ensamblador(Shunting root){
+    	  if (root.operand1!=null){
+          	ensamblador(root.operand1);
+          }
+
+          if (root.operand2!=null){
+        	  ensamblador(root.operand2);
+          }
+        //MULTIPLICACION
+        if (root.charac=='*'){
+        System.out.println("          ;MULTIPLICACION");
+        System.out.println("          MOV    AL," +root.operand1.name);
+        System.out.println("          MOV    AH," +root.operand2.name);
+        System.out.println("          MUL    AH,");
+        System.out.println("          MOV    T1,AX");
+        }
+        //DIVISION
+        if (root.charac=='/'){
+        	System.out.println("          ;DIVISION");
+            System.out.println("          MOV    AX," +root.operand1.name);
+            System.out.println("          MOV    BL," +root.operand2.name);
+            System.out.println("          DIV    BL,");
+            System.out.println("          MOV    T2,AL");
+            }
+        
+        //SUMA
+        if (root.charac=='+'){
+        	System.out.println("          ;SUMA");
+            System.out.println("          MOV    AX,T1");
+            System.out.println("          MOV    X,AX");
+            System.out.println("          MUL    AH,T2");
+            System.out.println("          MOV    X,AH");
+            }
+        //SUMA
+        if (root.charac=='-'){
+        	System.out.println("          ;RESTA");
+            System.out.println("          MOV    AX,T1");
+            System.out.println("          MOV    X,AX");
+            System.out.println("          SUB    AH,T2");
+            System.out.println("          MOV    X,AH");
+            }
+
+        
+    }
+    
     //preorden
     public static void preorden(Shunting root){
         
@@ -101,7 +174,7 @@ public class Arbol{
         }
         
     }
-
+ 
 
     private static Shunting shunt(String inputString) {
 

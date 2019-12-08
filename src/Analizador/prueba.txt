@@ -7,7 +7,7 @@ public class automatasproyecto{
 	public int c=5;
 	if(10>4){
 	public int numero=1;
-	public int ecuacion1=(1*2+9)/2;
+	public int ecuacion1=1*2+9/2;
 	nop=false;
 	}
 	while(10>2){
